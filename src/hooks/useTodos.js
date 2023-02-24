@@ -2,7 +2,7 @@ import { useQuery, gql } from "@apollo/client";
 
 const GET_CHARACTERS = gql`
   query {
-    todos {
+    todos(where: {id: {_gt: 72650}}) {
       title
       is_public
       id

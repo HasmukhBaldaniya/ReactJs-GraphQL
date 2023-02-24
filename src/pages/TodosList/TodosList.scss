@@ -5,4 +5,25 @@
   gap: 20px;
   padding: 0 20px;
   box-sizing: border-box;
+  justify-content: space-between;
+
+  .table-container {
+    width: 40%;
+
+    table {
+      width: 100%;
+
+      td {
+        a {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+  
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
