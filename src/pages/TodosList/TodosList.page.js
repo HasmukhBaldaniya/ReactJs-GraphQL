@@ -29,7 +29,7 @@ const TodosList = () => {
                   <td>{item.id}</td>
                   <td>{item.title}</td>
                   <td>
-                    <Link to={"/" + item.id}>View</Link>
+                    <Link to={"/todo/" + item.id}>View</Link>
                   </td>
                 </tr>
               );
@@ -55,7 +55,7 @@ const TodosList = () => {
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>
-                    <Link to={"/" + item.id}>View</Link>
+                    <Link to={"/user/" + item.id}>View</Link>
                   </td>
                 </tr>
               );

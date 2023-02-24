@@ -1,21 +1,15 @@
 import { useQuery, gql } from "@apollo/client";
 
 const GET_CHARACTER = gql`
-  query GetTodo($id: Int!) {
-    todos_by_pk(id: $id) {
+  query GetTodo($id: String!) {
+    users_by_pk(id: $id) {
       id
-      title
-      is_public
-      created_at
-      user {
-        id
-        name
-      }
+      name
     }
   }
 `;
 
-export const useTodo = (id) => {
+export const useUser = (id) => {
   const { error, data, loading } = useQuery(GET_CHARACTER, {
     variables: { id },
   });

@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useTodo } from "./../../hooks/useTodo";
-import "./TodoDetails.scss";
+import { useUser } from "../../hooks/useUser";
+import "./UserDetails.scss";
 
-const TodoDetails = () => {
+const UserDetails = () => {
   const param = useParams();
-  const { error, data, loading } = useTodo(param["todoId"]);
+  const { error, data, loading } = useUser(param["userId"]);
   if (error) return <div>{error}</div>;
   if (loading) return <div>{"Loading....."}</div>;
 
@@ -18,16 +18,14 @@ const TodoDetails = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>User Name</th>
+                <th>Name</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
-                <td>{data.todos_by_pk.id}</td>
-                <td>{data.todos_by_pk.title}</td>
-                <td>{data.todos_by_pk.user.name}</td>
+                <td>{data.users_by_pk.id}</td>
+                <td>{data.users_by_pk.name}</td>
               </tr>
             </tbody>
           </table>
@@ -37,4 +35,4 @@ const TodoDetails = () => {
   );
 };
 
-export default TodoDetails;
+export default UserDetails;
