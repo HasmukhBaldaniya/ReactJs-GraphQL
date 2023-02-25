@@ -1,10 +1,9 @@
 import { useQuery, gql } from "@apollo/client";
 
-const GET_CHARACTERS = gql`
+const GET_TODOS = gql`
   query {
-    todos(where: {id: {_gt: 72650}}) {
+    todos(where: {id: {_gt: 72691}}) {
       title
-      is_public
       id
     }
     users {
@@ -15,7 +14,7 @@ const GET_CHARACTERS = gql`
 `;
 
 export const useTodos = () => {
-  const { error, data, loading } = useQuery(GET_CHARACTERS);
+  const { error, data, loading } = useQuery(GET_TODOS);
   return {
     error,
     data,
