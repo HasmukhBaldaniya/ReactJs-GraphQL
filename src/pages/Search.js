@@ -2,7 +2,7 @@ import { gql, useLazyQuery } from "@apollo/client";
 import React, { useState } from "react";
 
 const GET_CHARACTER_LOCATION = gql`
-  query GetCharacterLocation($name: String) {
+  query GetTodoLocation($name: String) {
     characters(filter: { name: $name }) {
       results {
         location {

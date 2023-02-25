@@ -1,0 +1,35 @@
+table {
+    border: 1px solid #ccc;
+    border-spacing: 0;
+    width: calc(50% - 20px);
+    
+    thead {
+      tr {
+        th {
+          text-align: left;
+          border-bottom: 1px solid #ccc;
+          padding: 15px 30px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          border-bottom: 1px solid #ccc;
+          padding: 15px 30px;
+        }
+      }
+    }
+  }
+
+  button {
+    background: #0077ff;
+    border: 0;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 41px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
