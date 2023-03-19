@@ -1,8 +1,8 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, useLazyQuery, gql } from "@apollo/client";
 
 const GET_TODOS = gql`
   query {
-    todos(where: {id: {_gt: 72691}}) {
+    todos(where: {id: {_gt: 73509}}) {
       title
       id
     }
@@ -14,10 +14,12 @@ const GET_TODOS = gql`
 `;
 
 export const useTodos = () => {
-  const { error, data, loading } = useQuery(GET_TODOS);
+  const { error, data, loading, refetch } = useQuery(GET_TODOS);
   return {
     error,
     data,
     loading,
+    refetch,
   };
 };
+

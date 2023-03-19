@@ -11,13 +11,17 @@ const TodosList = () => {
   const navigation = useNavigate();
   
   // Get todo list 
-  const { error, data, loading } = useTodos();
+  const {refetch, error, data, loading } = useTodos();
 
   // Delete todo list
   const [DeleteTodo, { error: err, data: resData, loading: waiting }] =
     useMutation(DELETE_TODO, {
       variables: { id: todoId },
     });
+
+    useEffect(() => {
+      refetch()
+    }, []);
 
   useEffect(() => {
     if (todoId) {
@@ -26,10 +30,10 @@ const TodosList = () => {
   }, [todoId]);
   
   useEffect(() => {
-    if (resData) {
-      DeleteTodo();
+    if(resData) {
+        refetch()
     }
-  }, [todoId]);
+  }, [resData]);
 
   if (error) return <div>{error}</div>;
   if (loading) return <div>{"Loading....."}</div>;
@@ -50,7 +54,7 @@ const TodosList = () => {
             </tr>
           </thead>
           <tbody>
-            {data.todos.map((item) => {
+            {data?.todos.map((item) => {
               return (
                 <tr key={item.id}>
                   <td>{item.id}</td>
@@ -87,7 +91,7 @@ const TodosList = () => {
             </tr>
           </thead>
           <tbody>
-            {data.users.map((item) => {
+            {data?.users.map((item) => {
               return (
                 <tr key={item.id}>
                   <td>{item.id}</td>
