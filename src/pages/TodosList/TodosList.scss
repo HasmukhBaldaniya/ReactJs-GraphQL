@@ -27,3 +27,33 @@
     align-items: center;
   }
 }
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  box-sizing: border-box;
+  gap: 5px;
+}
+
+.pagination {
+  display: flex;
+  gap: 2px;
+  padding: 5px;
+  button {
+    color: black;
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 5px;
+
+    &.active {
+      background-color: #0077ff;
+      color: white;
+      border: 1px solid #0077ff;
+    }
+  }
+}
