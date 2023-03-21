@@ -8,10 +8,11 @@ import "./TodosList.scss";
 
 const TodosList = () => {
   const [todoId, setTodoId] = useState();
+  const [searchText, setSearchText] = useState("");
   const navigation = useNavigate();
-  
-  // Get todo list 
-  const {refetch, error, data, loading } = useTodos();
+
+  // Get todo list
+  const { refetch, error, data, loading } = useTodos(searchText);
 
   // Delete todo list
   const [DeleteTodo, { error: err, data: resData, loading: waiting }] =
@@ -19,24 +20,23 @@ const TodosList = () => {
       variables: { id: todoId },
     });
 
-    useEffect(() => {
-      refetch()
-    }, []);
+  useEffect(() => {
+    refetch();
+  }, []);
 
   useEffect(() => {
     if (todoId) {
       DeleteTodo();
     }
   }, [todoId]);
-  
+
   useEffect(() => {
-    if(resData) {
-        refetch()
+    if (resData) {
+      refetch();
     }
   }, [resData]);
 
   if (error) return <div>{error}</div>;
-  if (loading) return <div>{"Loading....."}</div>;
 
   return (
     <div className="characterList">
@@ -45,6 +45,15 @@ const TodosList = () => {
           <h2>Todos List Using GraphQL</h2>
           <button onClick={() => navigation("/todo/add")}>Add Todo</button>
         </div>
+
+        <div className="table-header">
+          <input
+            type={"test"}
+            placeholder="Search title"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
+
         <table>
           <thead>
             <tr>
@@ -53,27 +62,42 @@ const TodosList = () => {
               <th>Details</th>
             </tr>
           </thead>
-          <tbody>
-            {data?.todos.map((item) => {
-              return (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.title}</td>
-                  <td>
-                    <Link to={"/todo/detail/" + item.id}>View</Link>
-                    <Link to={"/todo/update/" + item.id}>Edit</Link>
-                    <button
-                      onClick={() => {
-                        setTodoId(item.id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+
+          {loading ? (
+            <tbody>
+            <tr>
+              <td colSpan={4}>Loading.....</td>
+            </tr>
           </tbody>
+          ) : data.todos && data.todos.length > 0 ? (
+            <tbody>
+              {data?.todos.map((item) => {
+                return (
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{item.title}</td>
+                    <td>
+                      <Link to={"/todo/detail/" + item.id}>View</Link>
+                      <Link to={"/todo/update/" + item.id}>Edit</Link>
+                      <button
+                        onClick={() => {
+                          setTodoId(item.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={4}>No data found</td>
+              </tr>
+            </tbody>
+          )}
         </table>
       </div>
 
@@ -83,6 +107,7 @@ const TodosList = () => {
           <button>Add User</button>
         </div>
         <table>
+          
           <thead>
             <tr>
               <th>ID</th>
@@ -90,6 +115,7 @@ const TodosList = () => {
               <th>Details</th>
             </tr>
           </thead>
+
           <tbody>
             {data?.users.map((item) => {
               return (

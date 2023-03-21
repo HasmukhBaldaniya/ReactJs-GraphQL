@@ -1,8 +1,9 @@
-import { useQuery, useLazyQuery, gql } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
+
 
 const GET_TODOS = gql`
-  query {
-    todos(where: {id: {_gt: 73509}}) {
+  query TodosFilter($title: String!){
+    todos(where: {id: {_gt: 73540}, title: {_like: $title}}) {
       title
       id
     }
@@ -13,8 +14,10 @@ const GET_TODOS = gql`
   }
 `;
 
-export const useTodos = () => {
-  const { error, data, loading, refetch } = useQuery(GET_TODOS);
+export const useTodos = (title = "") => {
+  const { error, data, loading, refetch } = useQuery(GET_TODOS, {
+    variables: {title: `%${title}%`},
+  });
   return {
     error,
     data,
@@ -22,4 +25,3 @@ export const useTodos = () => {
     refetch,
   };
 };
-
